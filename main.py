@@ -18,7 +18,7 @@ else:
 audio = whisper.load_audio("audioFiles/allanVoice.mp3")
 model = whisper.load_model("small", device=device)
 
-result = model.transcribe(audio)
+result = model.transcribe(audio, language='en')
 
 
 
