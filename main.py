@@ -4,7 +4,8 @@ import whisper
 import sys
 import os
 
-input_filename = "allanVoice.mp3"
+input_filename = "Town Names.mp3"
+initial_prompts = ["Moonbi", "Attunga","Kootingal", "Attunga","Quirindi", "Attunga"]
 
 
 output_filename = input_filename[:11].replace(".", "").rstrip() + ".txt"
@@ -39,7 +40,12 @@ except:
 print("  Loading model... ")
 model = whisper.load_model("medium.en", device=device)
 print("    Transcribing ... ")
-result = model.transcribe(audio)
+
+
+# Join the initial prompts into a single string
+prompt_text = "\n".join(initial_prompts)
+# Transcribe using the model and prompts
+result = model.transcribe(audio, prompt=prompt_text)
 print("      Writing Output... ")
 with open(path_to_output, "w") as file:  # # Open a file for writing
 	sys.stdout = file  # Redirect the standard output to the file
