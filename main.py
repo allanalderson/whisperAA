@@ -4,10 +4,10 @@ import whisper
 import sys
 import os
 
-input_filename = "AC_N80 Aderson Eileen 1995.mp3"
+input_filename = "allanVoice.mp3"
 
 
-output_filename = input_filename[:11].rstrip() + ".txt"
+output_filename = input_filename[:11].replace(".", "").rstrip() + ".txt"
 input_folder = "readFolder"
 output_folder = "writeFolder"
 path_to_input = os.path.join(input_folder, input_filename)
@@ -25,8 +25,8 @@ else:
 	print("Torch GPU unavailable")
 	device = device = torch.device('cpu')
 
-# print("Input: ", path_to_input)
-# print("Output: ", path_to_output)
+print("Input: ", path_to_input)
+print("Output: ", path_to_output)
 
 print()
 print("Loading audio file... ")
