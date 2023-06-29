@@ -1,4 +1,4 @@
-
+'''Working with Py3.10.11 and pyTorch 2.0.1+cu117 with CUDA Toolkit 11.7 on a 2080 Ti'''
 import torch
 import whisper
 import sys
@@ -10,23 +10,19 @@ if torch.cuda.is_available():
 	torch_version = torch.__version__
 	print("PyTorch version:", torch_version)
 	print()
-	device = device = torch.device('cuda')
+	device = torch.device('cuda')
 else:
-	print ("Torch GPU unavailable")
+	print("Torch GPU unavailable")
 	device = device = torch.device('cpu')
 
-
-audio = whisper.load_audio("inputAudio/AustralianVoice.mp3")
-model = whisper.load_model("small", device=device)
-result = model.transcribe(audio, language='en')
-
-
-
-# print(result["text"])
-
-
-with open("outputText/output.txt", "w") as file:  # # Open a file for writing
+print("Loading Audio... ")
+audio = whisper.load_audio("input/soundfile.mp3")
+print("  Loading Model... ")
+model = whisper.load_model("medium.en", device=device)
+print("    Transcribing ... ")
+result = model.transcribe(audio)
+print("      Writing Output... ")
+with open("output/transcription.txt", "w") as file:  # # Open a file for writing
 	sys.stdout = file  # Redirect the standard output to the file
 	print(result["text"])  # # Print the result to the file
-
 sys.stdout = sys.__stdout__  # # Restore the standard output
