@@ -4,16 +4,14 @@ import whisper
 import sys
 import os
 
-input_filename = "AC_N80 Alderson Eileen 1995.mp3"
+input_filename = "AC_N80 Aderson Eileen 1995.mp3"
+
 
 output_filename = input_filename[:11].rstrip() + ".txt"
-
-
 input_folder = "readFolder"
 output_folder = "writeFolder"
-input_filename = os.path.join(input_folder, input_filename)
-output_file = os.path.join(output_folder, output_filename)
-
+path_to_input = os.path.join(input_folder, input_filename)
+path_to_output = os.path.join(output_folder, output_filename)
 
 if torch.cuda.is_available():
 	print("Current CUDA device:", torch.cuda.get_device_name())
@@ -27,19 +25,23 @@ else:
 	print("Torch GPU unavailable")
 	device = device = torch.device('cpu')
 
-print("Input: ", input_filename)
-print("Output: ", output_file)
+# print("Input: ", path_to_input)
+# print("Output: ", path_to_output)
+
 print()
+print("Loading audio file... ")
+try:
+	audio = whisper.load_audio(path_to_input)
+except:
+	print ("FILE NOT FOUND.  ERROR IN FILENAME?")
+	exit()
 
-print("Loading Audio... ")
-audio = whisper.load_audio(input_filename)
-
-print("  Loading Model... ")
+print("  Loading model... ")
 model = whisper.load_model("medium.en", device=device)
 print("    Transcribing ... ")
 result = model.transcribe(audio)
 print("      Writing Output... ")
-with open(output_file, "w") as file:  # # Open a file for writing
+with open(path_to_output, "w") as file:  # # Open a file for writing
 	sys.stdout = file  # Redirect the standard output to the file
 	print(result["text"])  # # Print the result to the file
 sys.stdout = sys.__stdout__  # # Restore the standard output
