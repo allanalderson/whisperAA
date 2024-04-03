@@ -4,13 +4,13 @@ import whisper
 import sys
 import os
 
-input_filename = "Town Names.mp3"
+input_filename = "myVoice.mp3"
 initial_prompts = ["Moonbi", "Attunga","Kootingal", "Attunga","Quirindi", "Attunga"]
 
 
 output_filename = input_filename[:11].replace(".", "").rstrip() + ".txt"
-input_folder = "readFolder"
-output_folder = "writeFolder"
+input_folder = "audio_input"
+output_folder = "text_output"
 path_to_input = os.path.join(input_folder, input_filename)
 path_to_output = os.path.join(output_folder, output_filename)
 
