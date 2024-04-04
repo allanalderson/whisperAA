@@ -25,7 +25,7 @@ print(" Loading model... \n")
 model = whisper.load_model("medium.en", device=device)
 
 for input_filename in os.listdir(input_folder):
-    if input_filename.endswith(".mp3") or input_filename.endswith(".wav") or input_filename.endswith(".flac"):
+    if input_filename.endswith(".mp3") or input_filename.endswith(".wav") or input_filename.endswith(".flac") or input_filename.endswith(".wma") or input_filename.endswith(".m4a"):
         path_to_input = os.path.join(input_folder, input_filename)
         output_filename = input_filename[:11].replace(".", "").rstrip() + ".txt"
         path_to_output = os.path.join(output_folder, output_filename)
