@@ -3,7 +3,7 @@ import whisper
 import sys
 import os
 
-initial_prompts = ["Moonbi", "Attunga", "Kootingal", "Attunga", "Quirindi", "Attunga"]
+initial_prompts = ["Moonbi", "Attunga", "Kootingal", "Quirindi"]
 
 input_folder = "audio_input"
 output_folder = "text_output"
